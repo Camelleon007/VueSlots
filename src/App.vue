@@ -1,49 +1,41 @@
 <template>
   <!-- <the-header></the-header> -->
   <TheHeader />
-  <BadgeList />
-  <UserInfo
-    :full-name="activeUser.name"
-    :info-text="activeUser.description"
-    :role="activeUser.role"
-  />
-  <CourseGoals>
-    <template #default="goalsProps">
-      <h2>{{ goalsProps.item }}</h2>
-      <p>{{ goalsProps["item-key"] }}</p>
-    </template>
-  </CourseGoals>
-  <CourseGoals>
-    <template #default="goalsProps">
-      <h1 class="color-red">{{ goalsProps.item }}</h1>
-      <p class="bg-green">Desc: {{ goalsProps.itemDesc }}</p>
-    </template>
-  </CourseGoals>
+  <ActiveGoals />
+  <ManageGoals />
+  <button @click="setSelectedComponent('ActiveGoals')">Active Goals</button>
+  <button @click="setSelectedComponent('ManageGoals')">Manage Goals</button>
+  <component :is="selectedComponent"></component>
 </template>
 
 <script>
 import TheHeader from "./components/TheHeader.vue";
-import BadgeList from "./components/BadgeList.vue";
-import UserInfo from "./components/UserInfo.vue";
-import CourseGoals from "./components/CourseGoals.vue";
+// import BadgeList from "./components/BadgeList.vue";
+// import UserInfo from "./components/UserInfo.vue";
+// import CourseGoals from "./components/CourseGoals.vue";
+import ActiveGoals from "./components/ActiveGoals.vue";
+import ManageGoals from "./components/ManageGoals.vue";
 
 export default {
   components: {
-    //"the-header": TheHeader,
-    //TheHeader: TheHeader,
     TheHeader,
-    BadgeList,
-    UserInfo,
-    CourseGoals,
+    ActiveGoals,
+    ManageGoals,
   },
   data() {
     return {
+      selectedComponent: "ActiveGoals",
       activeUser: {
         name: "Maximilian Schwarzmüller",
         description: "Site owner and admin",
         role: "admin",
       },
     };
+  },
+  methods: {
+    setSelectedComponent(cmp) {
+      this.selectedComponent = cmp;
+    },
   },
 };
 </script>

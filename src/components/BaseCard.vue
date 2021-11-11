@@ -5,7 +5,7 @@
         <h4>Default content</h4>
       </slot>
     </header>
-    <slot></slot>
+    <slot v-if="$slots.default"></slot>
   </div>
 </template>
 
